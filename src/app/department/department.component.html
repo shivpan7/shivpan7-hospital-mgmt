@@ -1,0 +1,90 @@
+<div class="container">
+    <div class="card">
+        <div class="card-header text-center">
+            Department List
+        </div>
+        <div class="card-body">
+            <button class="bg-primary" (click)="sortData()">Sort by Department name</button>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Department Name</th>
+                            <th scope="col">Head of Department</th>
+                            <th scope="col">Contact Number</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let ele of data;let i=index">
+                            <th scope="row">{{i+1}}</th>
+                            <td>
+                                <div *ngIf="tempObj && i==selectedIndex; else input">
+
+                                    <input type="text" id="template-contactform-town" name="template-contactform-town"
+                                        [(ngModel)]="ele.departmentname" />
+
+                                </div>
+                                <ng-template #input>
+                                    <span>
+                                        {{ele.departmentname}}
+                                    </span>
+                                </ng-template>
+                            </td>
+                            <td>
+                                <div *ngIf="tempObj && i==selectedIndex; else input1">
+
+                                    <input type="text" id="template-contactform-town" name="template-contactform-town"
+                                        [(ngModel)]="ele.head" />
+                                </div>
+                                <ng-template #input1>
+                                    <span>
+                                        {{ele.head}}
+                                    </span>
+                                </ng-template>
+                            </td>
+                            <td>
+                                <div *ngIf="tempObj && i==selectedIndex; else input2">
+
+                                    <input type="text" id="template-contactform-town" name="template-contactform-town"
+                                        [(ngModel)]="ele.contactnumber" />
+                                </div>
+                                <ng-template #input2>
+                                    <span>
+                                        {{ele.contactnumber }}
+                                    </span>
+                                </ng-template>
+                            </td>
+                            <td>
+                                <button *ngIf="!tempObj " (click)="editInput(i)">Edit</button>
+                                <button *ngIf="!tempObj " (click)="delete(i)">Delete</button>
+                                <ng-container *ngIf="tempObj && i==selectedIndex">
+                                    <button (click)="saveInput(i)">Save</button>
+                                    <button (click)="CancelInput()">Cancel</button>
+                                </ng-container>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row"></th>
+                            <td><input type="text" id="template-contactform-town" name="template-contactform-town"
+                                    [(ngModel)]="newData.newDepartment" /></td>
+                            <td><input type="text" id="template-contactform-town" name="template-contactform-town"
+                                    [(ngModel)]="newData.newHead" /></td>
+                            <td><input type="number" id="template-contactform-town" name="template-contactform-town"
+                                    [(ngModel)]="newData.newNumber" /></td>
+                            <td>
+                                <ng-container *ngIf="newData.newDepartment && newData.newHead && newData.newNumber">
+                                    <button (click)="saveInput('new')">Save</button>
+                                    <button (click)="CancelInput()">Cancel</button>
+                                </ng-container>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

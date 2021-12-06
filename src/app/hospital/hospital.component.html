@@ -1,0 +1,77 @@
+<div class="container">
+    <div class="card">
+        <div class="card-header text-center">
+            Hospital List
+        </div>
+        <div class="card-body">
+            <button class="bg-primary" (click)="sortData()">Sort by Hospital name</button>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Hospital Name</th>
+                            <th scope="col">Contact Number</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let ele of data;let i=index">
+                            <th scope="row">{{i+1}}</th>
+                            <td>
+                                <div *ngIf="tempObj && i==selectedIndex; else input">
+
+                                    <input type="text" id="template-contactform-town" name="template-contactform-town"
+                                        [(ngModel)]="ele.hospitalname" />
+
+                                </div>
+                                <ng-template #input>
+                                    <span>
+                                        {{ele.hospitalname}}
+                                    </span>
+                                </ng-template>
+                            </td>
+                            <td>
+                                <div *ngIf="tempObj && i==selectedIndex; else input1">
+
+                                    <input type="text" id="template-contactform-town" name="template-contactform-town"
+                                        [(ngModel)]="ele.contactnumber" />
+                                </div>
+                                <ng-template #input1>
+                                    <span>
+                                        {{ele.contactnumber}}
+                                    </span>
+                                </ng-template>
+                            </td>
+                            <td>
+                                <span><a [routerLink]="['/department']"
+                                        [queryParams]="{hospital:ele.hospitalname}">View</a></span>
+                                <button *ngIf="!tempObj " (click)="editInput(i)">Edit</button>
+                                <button *ngIf="!tempObj " (click)="delete(i)">Delete</button>
+                                <ng-container *ngIf="tempObj && i==selectedIndex">
+                                    <button (click)="saveInput(i)">Save</button>
+                                    <button (click)="CancelInput()">Cancel</button>
+                                </ng-container>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row"></th>
+                            <td><input type="text" id="template-contactform-town" name="template-contactform-town"
+                                    [(ngModel)]="newData.newHospital" /></td>
+                            <td><input type="number" id="template-contactform-town" name="template-contactform-town"
+                                    [(ngModel)]="newData.newNumber" /></td>
+                            <td>
+                                <ng-container *ngIf="newData.newHospital && newData.newNumber">
+                                    <button (click)="saveInput('new')">Save</button>
+                                    <button (click)="CancelInput()">Cancel</button>
+                                </ng-container>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
