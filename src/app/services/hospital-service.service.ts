@@ -54,7 +54,7 @@ export class HospitalService {
   }
 
   updateDeaprtment(payload: any) {
-    let index = this.data.findIndex(x => x.id == payload.id);
+    let index = this.deptData.findIndex(x => x.id == payload.id);
     this.deptData[index]['departmentname'] = payload.departmentname;
     this.deptData[index]['head'] = payload.head;
     this.deptData[index]['contactnumber'] = payload.contactnumber;

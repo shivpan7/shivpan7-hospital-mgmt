@@ -58,6 +58,7 @@ export class HospitalComponent implements OnInit {
         hospitalname: this.newData.newHospital,
         contactnumber: this.newData.newNumber
       })
+      this.data = this.hospitalService.getHospitalData();
       this.newData = {
         newHospital: '',
         newNumber: ''
